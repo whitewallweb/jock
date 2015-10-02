@@ -1,0 +1,8 @@
+/* CSS used for styling the Settings form */
+.postbox {}
+.postbox p {color: #464646; font-size: 13px; font-family: arial, sans-serif; margin: 10px 20px;}
+.postbox p img.editor-button {width: 100%;}
+.postbox ol li {color: #464646; font-size: 13px; font-family: arial, sans-serif; margin: 0 0 8px 30px;}
+table {border: 1px solid #e2e2e2; border-radius: 6px;}
+.postbox table td p {font-size: 12px; color: #666666; font-family: arial;}
+table td xmp {font-size: 12px; color: #666666; font-family: arial;}
