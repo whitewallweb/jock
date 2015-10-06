@@ -77,6 +77,8 @@ class Jock_Plugin extends Jock_LifeCycle {
      * @return void
      */
     public function upgrade() {
+        
+        
     }
 
     public function addActionsAndFilters() {
@@ -113,6 +115,8 @@ class Jock_Plugin extends Jock_LifeCycle {
         //JD-91 Delivery T&C's
         add_action( 'woocommerce_after_cart', array(&$this,'delivery_notice' ));
         
+        //JD-86 - Gauteng only for launch
+        add_filter('woocommerce_countries_shipping_country_states',array(&$this,'limit_delivery_states' ));
         
         // Adding scripts & styles to all pages
         // Examples:
@@ -131,6 +135,7 @@ class Jock_Plugin extends Jock_LifeCycle {
     }
     
     
+    //ACTIONS
     function validate_checkout_field_process() 
     {
         // Check if set, if its not set add an error.
@@ -173,8 +178,26 @@ class Jock_Plugin extends Jock_LifeCycle {
     function delivery_notice()
     {
         echo '<br/><div id="delivery-notice" class="alert-warning padded">';
-        echo "<p class='text-center'><br/>Delivery takes place on weekdays only. No deliveries are don on weekend or public holidays.<br/><br/></p>";
+        echo "<p class='text-center'><br/>Delivery takes place on weekdays only. No deliveries are done on weekends or public holidays.<br/><br/></p>";
         echo '</div>';
+    }
+    
+    
+    //FILTERS
+    function limit_delivery_states($states)
+    {
+        
+//        if(array_key_exists('ZA', $states))
+//        {
+            return array('ZA' => array(
+        	'GP'  => __( 'Gauteng', 'woocommerce' )
+                ));
+//        }
+//        else
+//        {
+//            return $states;
+//        }
+//        
     }
 
 
