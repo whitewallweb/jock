@@ -58,14 +58,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-8">
                     <div class="footer-menu">
-                        <ul>
-                            <li><a class="active" href="/">Home</a></li>
-                            <li><a href="<?php echo get_bloginfo('url') ?>/about-us">About us</a></li>
-                            <li><a href="<?php echo get_bloginfo('url') ?>/products">Products</a></li>
-                            <li><a href="<?php echo get_bloginfo('url') ?>/store-locator">Store locator</a></li>
-                            <li><a href="<?php echo get_bloginfo('url') ?>/register">Registration</a></li>
-                            <li><a href="<?php echo get_bloginfo('url') ?>/contact-us">Contact us</a></li>
-                        </ul>
+                       <?php if ( dynamic_sidebar('footer_menu') ) : else : endif; ?>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4">

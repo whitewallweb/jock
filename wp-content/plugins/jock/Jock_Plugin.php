@@ -117,6 +117,7 @@ class Jock_Plugin extends Jock_LifeCycle {
         
         //JD-86 - Gauteng only for launch
         add_filter('woocommerce_countries_shipping_country_states',array(&$this,'limit_delivery_states' ));
+        add_filter('woocommerce_countries_allowed_country_states',array(&$this,'limit_delivery_states' ));
         
         // Adding scripts & styles to all pages
         // Examples:

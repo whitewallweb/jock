@@ -782,11 +782,24 @@ function create_widget($name, $id, $description) {
 // already handled by twiter embed
 // create_widget('footer one', 'footer_one', 'first footer widget');
 create_widget('footer two', 'footer_two', 'second footer widget');
-
+create_widget('footer menu', 'footer_menu', 'footer menu');
 /** changing default wordpres email settings */
 
 add_filter('wp_mail_from', 'new_mail_from');
 add_filter('wp_mail_from_name', 'new_mail_from_name');
+
+add_action( 'after_setup_theme', 'register_widget_areas' );
+
+if ( !function_exists( 'register_widget_areas' ) ){
+    function register_widget_areas()
+    {
+        register_sidebar( array(
+		'name' => __( 'Footer Menu', 'afgri' ),
+		'id' => 'footer-menu',
+		'description' => __( 'Bottom Footer widget area', 'afgri' ),
+	) );
+    }
+}
 
 function new_mail_from($old) {
     return 'Yolanda.Hoyer@afgri.co.za';

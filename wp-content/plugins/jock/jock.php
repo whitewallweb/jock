@@ -2,7 +2,7 @@
 /*
    Plugin Name: Jock
    Plugin URI: http://wordpress.org/extend/plugins/jock/
-   Version: 0.2
+   Version: 0.3
    Author: Ants
    Description: Jock template
    Text Domain: jock
