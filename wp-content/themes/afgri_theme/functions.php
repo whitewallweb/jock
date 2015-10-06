@@ -794,5 +794,41 @@ function new_mail_from($old) {
 function new_mail_from_name($old) {
     return 'AFGRI Dog Food';
 }
+//
+//add_action('woocommerce_checkout_process', 'validate_checkout_field_process');
+//
+//function validate_checkout_field_process() {
+//    // Check if set, if its not set add an error.
+//    if ( ! $_POST['billing_phone']){
+//        wc_add_notice( __( 'Please enter phone number' ), 'error' );
+//    }
+//    $stripped = preg_replace( '/\D/', '', $_POST['billing_phone'] );
+//    $_POST['billing_phone'] = $stripped;
+//    if( strlen( $_POST['billing_phone'] ) != 10 ) { // Number string must equal this
+//         wc_add_notice( __( 'Please enter a 10 digit phone number.' ), 'error' );
+//    }
+//     if ( ! $_POST['terms_and']){
+//        wc_add_notice( __( 'Please accept the terms and conditions' ), 'error' );
+//    }
+//             
+//}
+//
+//add_action( 'woocommerce_after_order_notes', 'custom_jock_checkout_fields' );
+//
+//function custom_jock_checkout_fields($checkout)
+//{
+//     echo '<div id="billing_terms_and conditions">';
+//
+//    woocommerce_form_field( 'terms_and conditions', array(
+//        'type'          => 'checkbox',
+//        'class'         => array('my-field-class form-row-wide'),
+//        'label'         => __('I accept the <a target ="_blank" href="/general-conditions-of-online-supply">Terms and Conditions</a>'),
+//        'placeholder'   => __(''),
+//        ), $checkout->get_value( 'my_field_name' ));
+//
+//    echo '</div>';
+//    
+//}
+
 
 ?>

@@ -39,7 +39,7 @@ class milasSync {
             $records = $wpdb->get_results($sql);
             $meta = array();
             foreach ($records as $record) {
-                $meta += [$record->meta_key => $record->meta_value];
+                $meta += array($record->meta_key => $record->meta_value);
             }
             
             $orderNumber = $result->ID;
@@ -69,7 +69,7 @@ class milasSync {
                 
                 $meta = array();
                 foreach($orderItemDetails as $detail) {
-                    $meta += [$detail->meta_key => $detail->meta_value];
+                    $meta += array($detail->meta_key => $detail->meta_value);
                 }
                 
                 $packagingSize = $meta['weight'];
