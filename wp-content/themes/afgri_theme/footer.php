@@ -45,7 +45,7 @@
                     </ul>
                     <br>
                     <br>
-                    <img src="<?php echo get_template_directory_uri() ?>/img/footer_images/Footer-Elements-ppbAFGRI-Logo.png" style="width:240px;">
+                    <a href="http://www.afgri.co.za" target="_blank"><img src="<?php echo get_template_directory_uri() ?>/img/footer_images/Footer-Elements-ppbAFGRI-Logo.png" style="width:240px;"></a>
                 </div>
             </div>
         </div>
