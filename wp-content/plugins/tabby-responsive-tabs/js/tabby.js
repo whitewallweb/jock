@@ -30,9 +30,9 @@ var RESPONSIVEUI = {};
 				// if not then set first heading and tab to be the active one
 				var $activePanel = $tabs.find('.responsive-tabs__panel--active');
 				if(!$activePanel.length) {
-					$activePanel = $tabs.find('.responsive-tabs__panel').first().addClass('responsive-tabs__panel--active');
+					//$activePanel = $tabs.find('.responsive-tabs__panel').first().addClass('responsive-tabs__panel--active');
 				}
-
+                                //alert('gere');
 				/* Add active class to the active header of the panel (FOR MOBILE) */                
 				$activeHeader = $activePanel.prev();
 				if($activeHeader !== null) {
