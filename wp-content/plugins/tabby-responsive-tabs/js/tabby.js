@@ -41,8 +41,8 @@ var RESPONSIVEUI = {};
 
 				$tabs.find('.responsive-tabs__panel').not('.responsive-tabs__panel--active').hide().attr('aria-hidden','true'); //hide all except active panel
 				$activePanel.attr('aria-hidden', 'false');
-				/* make active tab panel hidden for mobile *
-				$activePanel.addClass('responsive-tabs__panel--closed-accordion-only');*/
+				/* make active tab panel hidden for mobile **/
+				$activePanel.addClass('responsive-tabs__panel--closed-accordion-only');
 
 				// wrap tabs in container - to be dynamically resized to help prevent page jump
 				var $tabsWrapper = $('<div/>', {'class': 'responsive-tabs-wrapper' });
