@@ -814,7 +814,7 @@ float:left;
 }
 
 .container {
-	padding:0;
+	//padding:10px;
 }
 
 .entry-summary .images {

@@ -1,6 +1,6 @@
 <div class="container center-content">
     <div class="row">
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-md-6 col-sm-4">
             <div class="hp-fa">
                 <?php $args = array(
                     'posts_per_page' => 1,
