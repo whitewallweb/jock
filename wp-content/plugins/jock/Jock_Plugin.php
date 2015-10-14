@@ -119,6 +119,10 @@ class Jock_Plugin extends Jock_LifeCycle {
         add_filter('woocommerce_countries_shipping_country_states',array(&$this,'limit_delivery_states' ));
         add_filter('woocommerce_countries_allowed_country_states',array(&$this,'limit_delivery_states' ));
         
+        
+        //JD-95 Custome checkout form
+        add_filter('woocommerce_checkout_fields',array(&$this,'custom_checkout_form' ));
+        
         // Adding scripts & styles to all pages
         // Examples:
         //        wp_enqueue_script('jquery');
@@ -151,12 +155,16 @@ class Jock_Plugin extends Jock_LifeCycle {
          if ( ! $_POST['terms_and_conditions']){
             wc_add_notice( __( 'Please accept the terms and conditions' ), 'error' );
         }
-
+        //default values
+        
+        $_POST['billing_state'] = 'Gauteng';
+        $_POST['billing_city'] = 'Gauteng';
+        
     }
     
     function custom_jock_checkout_fields($checkout)
     {
-         echo '<div id="billing_terms_and conditions">';
+        echo '<div id="billing_terms_and conditions">';
 
         woocommerce_form_field( 'terms_and_conditions', array(
             'type'          => 'checkbox',
@@ -166,7 +174,9 @@ class Jock_Plugin extends Jock_LifeCycle {
             ), $checkout->get_value( 'my_field_name' ));
 
         echo '</div>';
-
+        
+        echo "<script>$('#billing_suburb').change(function(){alert('hello')});</script>";
+        
     }
     
     function continue_shopping()
@@ -178,6 +188,9 @@ class Jock_Plugin extends Jock_LifeCycle {
     
     function delivery_notice()
     {
+        echo '<br/><div id="delivery-notice" class="alert-warning padded">';
+        echo "<p class='text-center'><br/>Currently only delivering in Gauteng Area.<br/><br/></p>";
+        echo '</div>';
         echo '<br/><div id="delivery-notice" class="alert-warning padded">';
         echo "<p class='text-center'><br/>Delivery takes place on weekdays only. No deliveries are done on weekends or public holidays.<br/><br/></p>";
         echo '</div>';
@@ -200,6 +213,111 @@ class Jock_Plugin extends Jock_LifeCycle {
 //        }
 //        
     }
-
+    
+    function custom_checkout_form($fields)
+    {
+        
+ 
+////          $fields['account']['account_password'] = array(
+////                 'type'              => 'password',
+////                 'label'             => __( 'Account password', 'woocommerce' ),
+////                 'required'          => true,
+////                 'placeholder'       => _x( 'Password', 'placeholder', 'woocommerce' )
+////             );
+//       //var_dump(  $fields['shipping']);
+//          $fields['shipping'] = array_intersect_key($fields['shipping'],array_flip(array(
+//              'shipping_country','shipping_state'
+//          ))
+//                  );
+             $fields['shipping'] = array_merge(array_flip(array(
+              'shipping_country',
+              'shipping_state',
+              'shipping_postcode',
+              'shipping_city',
+              'shipping_address_1',
+              'shipping_address_2',
+              'shipping_first_name',
+              'shipping_last_name',
+              'shipping_company',
+              
+          )),$fields['shipping'] ); 
+        
+             //new fields
+             
+             //get options from xml file
+             
+             
+             $postal_codes = json_decode(json_encode(simplexml_load_file(dirname(__FILE__).'/languages/postal_codes/postal_codes.xml')),true);
+             //var_dump($postal_codes);
+             
+             
+             foreach($postal_codes['RECORD'] as $row)
+             {
+                
+                 if(strstr(strtolower($row['group']), 'pretoria') || strstr(strtolower($row['group']), '(gp)')|| strstr(strtolower($row['group']), 'gauteng')|| strstr(strtolower($row['suburb']), 'gauteng'))
+                 {
+                     //$gauteng_postals[] =  $row;
+                     $city_options[$row['group']] = ucwords(strtolower($row['group']));
+                     $gauteng_postals_options[$row['post_code']] = ucwords(strtolower($row['suburb'])." (".$row['post_code'].")");
+                 }
+                 else
+                {
+                     continue;
+                }
+             }
+             sort($gauteng_postals_options);
+            
+            $fields['billing']['billing_postcode'] = array(
+                'type'=>'select',
+                'label'=>'Suburb (Postal Code)',
+                'required'=>1,
+                'options'=>$gauteng_postals_options,
+                'class'=>array('form-row-wide'));
+            
+             $fields['billing']['billing_city'] = array(
+                'type'=>'select',
+                'label'=>'City',
+                'required'=>1,
+                'options'=>$city_options,
+                'class'=>array('form-row-wide'));
+             
+             
+            $fields['billing'] = array_merge(array_flip(array(
+              'billing_country',
+              'billing_state',
+                'billing_city',
+              //'billing_suburb',    
+              'billing_postcode',
+              
+              'billing_address_1',
+              'billing_address_2',
+              'billing_first_name',
+              'billing_last_name',
+              'billing_company',
+              'billing_phone',  
+              'billing_email',    
+          )),$fields['billing'] ); 
+           
+         
+            
+          //change css
+          $fields['billing']['billing_first_name']['class'][0]='form-row-wide';
+          
+          $fields['billing']['billing_state']['class'][0]='form-row-wide';
+          $fields['billing']['billing_state']['type']='hidden';
+          
+          //$fields['billing']['billing_city']['type']='hidden';
+          
+          $fields['billing']['billing_postcode']['class'][0]='form-row-wide';
+          //$fields['billing']['billing_postcode']['type']='hidden';
+          
+          $fields['billing']['billing_last_name']['class'][0]='form-row-wide';
+          $fields['billing']['billing_phone']['class'][0]='form-row-wide';
+          $fields['billing']['billing_email']['class'][0]='form-row-wide';
+          
+          
+          
+          return $fields;
+   }
 
 }

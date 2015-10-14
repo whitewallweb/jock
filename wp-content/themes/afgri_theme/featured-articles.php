@@ -27,7 +27,7 @@
                 <?php endwhile; ?>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-4">
             <div class="hp-rn">
                 <h3>Recent News</h3>
 
@@ -36,7 +36,7 @@
 
             </div>
         </div>
-        <div class="col-xs-12 col-sm-3 hide-mobile">
+        <div class="col-xs-12 col-sm-4 hide-mobile">
             <div class="hp-ps">
 
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/Adspace - Jock_Promo-Teaser.jpg">
