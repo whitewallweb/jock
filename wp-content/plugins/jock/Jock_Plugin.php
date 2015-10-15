@@ -292,7 +292,7 @@ class Jock_Plugin extends Jock_LifeCycle {
           {
               $cities[$code['name']] = $code['name'];
           }
-          var_dump($cities);
+          
           foreach(array('billing','shipping') as $section)
           {
               $fields[$section][$section.'_postcode'] = array(
