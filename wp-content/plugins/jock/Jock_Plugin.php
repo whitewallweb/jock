@@ -345,9 +345,10 @@ class Jock_Plugin extends Jock_LifeCycle {
                 //$fields['billing']['billing_postcode']['type']='hidden';
 
                 $fields[$section][$section.'_last_name']['class'][0]='form-row-wide';
-                $fields[$section][$section.'_phone']['class'][0]='form-row-wide';
-                $fields[$section][$section.'_email']['class'][0]='form-row-wide';
+             
           }  
+             $fields[$section]['billing_phone']['class'][0] = 'form-row-wide';
+                $fields[$section]['billing_email']['class'][0] = 'form-row-wide';
           return $fields;
    }
 
