@@ -347,8 +347,8 @@ class Jock_Plugin extends Jock_LifeCycle {
                 $fields[$section][$section.'_last_name']['class'][0]='form-row-wide';
              
           }  
-             $fields[$section]['billing_phone']['class'][0] = 'form-row-wide';
-                $fields[$section]['billing_email']['class'][0] = 'form-row-wide';
+          $fields['billing']['billing_phone']['class'][0] = 'form-row-wide';
+          $fields['billing']['billing_email']['class'][0] = 'form-row-wide';
           return $fields;
    }
 
