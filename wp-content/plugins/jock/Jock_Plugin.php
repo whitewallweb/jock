@@ -187,8 +187,17 @@ class Jock_Plugin extends Jock_LifeCycle {
                 {
                     jQuery('#billing_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
                 }); });</script>";
-         echo "<style>#ship-to-different-address label{width:50%;}#ship-to-different-address input{float:right;}#customer_details .col-1,#customer_details .col-2{width:100%;}  #customer_details  div{display:block;float:none;}</style>";
-          echo "<script>$('#billing_city').change();</script>";
+         
+         echo "<script>$('#shipping_city').change(function(){
+                jQuery('#shipping_postcode option').remove();
+                jQuery.each(postal_codes[this.value]['suburbs'], function(key,suburb) 
+                {
+                    jQuery('#shipping_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
+                }); });</script>";
+         
+         echo "<style>#ship-to-different-address .checkbox{padding:0;margin:0;display:inline;}#customer_details .col-1,#customer_details .col-2{width:100%;}  #customer_details  div{display:block;float:none;}</style>";
+         echo "<script>$('#billing_city').change();</script>";
+         echo "<script>$('#shipping_city').change();</script>";
     }
     
     function postal_codes()
@@ -292,7 +301,7 @@ class Jock_Plugin extends Jock_LifeCycle {
           {
               $cities[$code['name']] = $code['name'];
           }
-          
+          ksort($cities);
           foreach(array('billing','shipping') as $section)
           {
               $fields[$section][$section.'_postcode'] = array(
