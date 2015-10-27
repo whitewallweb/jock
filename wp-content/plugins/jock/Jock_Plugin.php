@@ -174,54 +174,87 @@ class Jock_Plugin extends Jock_LifeCycle {
             ), $checkout->get_value( 'my_field_name' ));
 
         echo '</div>';
-        $codes = $this->postal_codes();
-//        foreach($codes as $code)
-//        {
-//            $json_code[$code['group']][]=array('suburb'=>$code['suburb'],'code'=>$code['post_code']);
-//        }
+        //$codes = $this->postal_codes();
+        //$json_code = json_encode($codes,true);
+        //var_dump($json_code);
+        //exit();
+        //var_dump($codes);
+        //echo ("<script>\\var postal_codes =  ".json_encode($codes,true).";</script>");
         
-         echo "<script>var postal_codes = ".  json_encode($codes).";</script>";
-         echo "<script>$('#billing_city').change(function(){
+        echo "<script>$('#billing_city').change(function(){
                 jQuery('#billing_postcode option').remove();
-                jQuery.each(postal_codes[this.value]['suburbs'], function(key,suburb) 
-                {
-                    jQuery('#billing_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
-                }); });</script>";
+                //fetch province suburbs
+                jQuery.getJSON('".plugins_url( '/ajax/suburbs.php?group=' , __FILE__ )."'+this.value, function(postal_codes) {
+                    jQuery.each(postal_codes['suburbs'], function(key,suburb) 
+                    {
+                        jQuery('#billing_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
+                    }); });
+                });</script>";
          
-         echo "<script>$('#shipping_city').change(function(){
+ echo "<script>$('#shipping_city').change(function(){
                 jQuery('#shipping_postcode option').remove();
-                jQuery.each(postal_codes[this.value]['suburbs'], function(key,suburb) 
-                {
-                    jQuery('#shipping_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
-                }); });</script>";
+                //fetch province suburbs
+                jQuery.getJSON('".plugins_url( '/ajax/suburbs.php?group=' , __FILE__ )."'+this.value, function(postal_codes) {
+                    jQuery.each(postal_codes['suburbs'], function(key,suburb) 
+                    {
+                        jQuery('#shipping_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
+                    }); });
+                });</script>";
          
          echo "<style>#ship-to-different-address .checkbox{padding:0;margin:0;display:inline;}#customer_details .col-1,#customer_details .col-2{width:100%;}  #customer_details  div{display:block;float:none;}</style>";
          echo "<script>$('#billing_city').change();</script>";
          echo "<script>$('#shipping_city').change();</script>";
     }
     
+    function csv_to_array($filename='', $delimiter=',')
+{
+	if(!file_exists($filename) || !is_readable($filename))
+		return FALSE;
+	
+	$header = NULL;
+	$data = array();
+	if (($handle = fopen($filename, 'r')) !== FALSE)
+	{
+		while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+		{
+			if(!$header)
+				$header = $row;
+			else
+				$data[] = array_combine($header, $row);
+		}
+		fclose($handle);
+	}
+	return $data;
+}
+    
     function postal_codes()
     {
-     
-             $postal_codes = json_decode(json_encode(simplexml_load_file(dirname(__FILE__).'/languages/postal_codes/postal_codes.xml')),true);
-             //var_dump($postal_codes);
-             
-             foreach($postal_codes['RECORD'] as $row)
+             $postal_codes = $this->csv_to_array(dirname(__FILE__).'/languages/postal_codes/GP_codes.csv',';');
+        
+             //$postal_codes = json_decode(json_encode(simplexml_load_file(dirname(__FILE__).'/languages/postal_codes/GautengPostalCode.csv')),true);
+//             var_dump($postal_codes);
+//             exit();
+             $city_options = array();
+             foreach($postal_codes as $row)
              {
                 
-                 if(strstr(strtolower($row['group']), 'pretoria') || strstr(strtolower($row['group']), '(gp)')|| strstr(strtolower($row['group']), 'gauteng')|| strstr(strtolower($row['suburb']), 'gauteng'))
-                 {
-                     //$gauteng_postals[] =  $row;
-                     
-                     $city_options[ucwords(strtolower($row['group']))]['name'] = ucwords(strtolower($row['group']));
-                     $city_options[ucwords(strtolower($row['group']))]['suburbs'][] = array('name'=> ucwords(strtolower($row['suburb'])),'code'=>$row['post_code']);
-                     //$gauteng_postals_options[$row['post_code']] = ucwords(strtolower($row['suburb'])." (".$row['post_code'].")");
-                 }
-                 else
-                {
-                     continue;
-                }
+                 $city_options[str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))))]['name'] = str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))));
+                 $city_options[str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))))]['suburbs'][] = array('name'=> str_replace("'"," ",ucwords(strtolower(trim($row['Location Code Name'])))),'code'=>$row['Post Code']);
+                 // exit(var_dump($city_options));
+//                 if(strstr(strtolower($row['group']), 'pretoria') || strstr(strtolower($row['group']), '(gp)')|| strstr(strtolower($row['group']), 'gauteng')|| strstr(strtolower($row['suburb']), 'gauteng'))
+//                 {
+//                     //$gauteng_postals[] =  $row;
+//                     
+//                     $city_options[ucwords(strtolower($row['group']))]['name'] = ucwords(strtolower($row['group']));
+//                     $city_options[ucwords(strtolower($row['group']))]['suburbs'][] = array('name'=> ucwords(strtolower($row['suburb'])),'code'=>$row['post_code']);
+//                     //$gauteng_postals_options[$row['post_code']] = ucwords(strtolower($row['suburb'])." (".$row['post_code'].")");
+//                 }
+//                 else
+//                {
+//                     continue;
+//                }
              }
+              
              return $city_options;
     }
     
@@ -302,6 +335,7 @@ class Jock_Plugin extends Jock_LifeCycle {
               $cities[$code['name']] = $code['name'];
           }
           ksort($cities);
+
           foreach(array('billing','shipping') as $section)
           {
               $fields[$section][$section.'_postcode'] = array(
@@ -349,6 +383,7 @@ class Jock_Plugin extends Jock_LifeCycle {
           }  
           $fields['billing']['billing_phone']['class'][0] = 'form-row-wide';
           $fields['billing']['billing_email']['class'][0] = 'form-row-wide';
+         
           return $fields;
    }
 
