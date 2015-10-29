@@ -807,12 +807,39 @@ h2.product_title.entry-title {
 .shoploop {
 list-style: none;
 }
-
-li.product {
+.widget_shopping_cart
+{
+    background-color: #fff;
+    margin-left:20px;
+    padding:5px;
+    margin-bottom: 10px;
+    width:100%;
+}
+.widget_shopping_cart .buttons
+{
+    text-align: center;
+}
+li.product
+{
 width:49%;
 float:left;
-}
 
+}
+div.product
+{
+   width:49%;
+   float:left;
+   padding:5px;
+}
+div.product label
+{
+   color:#000;
+   margin-top: 10px;
+}
+div.product div.images img
+{
+    height:300px;
+}
 .container {
 	//padding:10px;
 }
