@@ -64,7 +64,7 @@ if (isset($_GET['failed_login'])) {
 
 $blog_url = site_url();
 ?>
-<div id='wplb_wrap' style='float: <?php echo $data['float']; ?>;'>
+<div id='wplb_wrap'>
 <div id='wplb_main'>
 <form name='loginform' id='loginform' action='<?php echo $home; ?>/wp-login.php' method='post'>
 		<input type='text' class='wplb_field' name='log' id='user_login' <?php echo $extra; ?> value='username' onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;" /> 
@@ -78,6 +78,7 @@ $blog_url = site_url();
 		<input type='hidden' name='redirect_to' value='<?php echo $redirect; ?>' />
 		<input type='hidden' name='testcookie' value='1' />
 </form>
+    <div class="clear"></div>
 </div>
 <?php 
 if ($data['register'] == "1") {

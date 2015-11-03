@@ -4,7 +4,7 @@ $data = get_option('wplb_options');
 //access each field by its id
 ?>
 
-<div id="wplb_wrap" style="float: <?php echo $data['float']; ?>">
+<div id="wplb_wrap" >
 <a class='wplb_link'><?php echo $data['greeting']; ?>
 <?php 
 global $current_user;

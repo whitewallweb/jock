@@ -25,6 +25,19 @@ body {
   color: #6c6455;
   font-size: 13px;
 }
+#wplb_main
+{
+    
+}
+#wp-submit
+{
+    clear:left;
+}
+
+#submit-reg-form
+{
+    margin:auto;
+}
 /* line 32, ../Sass/main.scss */
 .hp-promo h2 {
   font-family: bookman-bold;
@@ -813,11 +826,16 @@ list-style: none;
     margin-left:20px;
     padding:5px;
     margin-bottom: 10px;
-    width:100%;
+    width: 100%;
+    max-width:291px;
 }
 .widget_shopping_cart .buttons
 {
     text-align: center;
+}
+.right-side
+{
+  
 }
 li.product
 {
@@ -979,8 +997,11 @@ input.input-text.qty.text {
 }
 
 /* Wordpress overrides */
+img.size-large,
 .wp-post-image {
     margin-bottom:20px;
+    max-width: 100%;
+    height: auto;
 }
 
 /*Dyna Tabs */
@@ -1185,6 +1206,9 @@ div.srp-post-date {
 /* WPLB overrides */
 #wplb_main {
     width:100% !important;
+    float:none;
+    clear:both;
+    min-width:0px;
 }
 
 #wplb_wrap .wplb_field {
