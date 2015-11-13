@@ -1031,7 +1031,6 @@ function woocommerce_init_paygate_gateway(){
 								cursor: "wait"
 							}
 						});
-
 						jQuery("#paygate_payweb_payment_form").submit();
 					});
 				</script>';
