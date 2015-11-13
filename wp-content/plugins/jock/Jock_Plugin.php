@@ -152,9 +152,9 @@ class Jock_Plugin extends Jock_LifeCycle {
         if( strlen( $_POST['billing_phone'] ) != 10 ) { // Number string must equal this
              wc_add_notice( __( 'Please enter a 10 digit phone number.' ), 'error' );
         }
-         if ( ! $_POST['terms_and_conditions']){
-            wc_add_notice( __( 'Please accept the terms and conditions' ), 'error' );
-        }
+//         if ( ! $_POST['terms_and_conditions']){
+//            wc_add_notice( __( 'Please accept the terms and conditions' ), 'error' );
+//        }
         //default values
         
         $_POST['billing_state'] = 'Gauteng';
@@ -164,16 +164,17 @@ class Jock_Plugin extends Jock_LifeCycle {
     
     function custom_jock_checkout_fields($checkout)
     {
-        echo '<div id="billing_terms_and conditions">';
-
-        woocommerce_form_field( 'terms_and_conditions', array(
-            'type'          => 'checkbox',
-            'class'         => array('my-field-class form-row-wide'),
-            'label'         => __('I accept the <a target ="_blank" href="/general-conditions-of-online-supply">Terms and Conditions</a>'),
-            'placeholder'   => __(''),
-            ), $checkout->get_value( 'my_field_name' ));
-
-        echo '</div>';
+        //custom not needed -  built it if you set terms page
+//        echo '<div id="billing_terms_and conditions">';
+//
+//        woocommerce_form_field( 'terms_and_conditions', array(
+//            'type'          => 'checkbox',
+//            'class'         => array('my-field-class form-row-wide'),
+//            'label'         => __('I accept the <a target ="_blank" href="/general-conditions-of-online-supply">Terms and Conditions</a>'),
+//            'placeholder'   => __(''),
+//            ), $checkout->get_value( 'my_field_name' ));
+//
+//        echo '</div>';
         //$codes = $this->postal_codes();
         //$json_code = json_encode($codes,true);
         //var_dump($json_code);
