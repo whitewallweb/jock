@@ -123,6 +123,17 @@ class Jock_Plugin extends Jock_LifeCycle {
         //JD-95 Custome checkout form
         add_filter('woocommerce_checkout_fields',array(&$this,'custom_checkout_form' ));
         
+        
+        
+        //JD-105 - Order Auto Complete
+        add_action( 'woocommerce_thankyou', array(&$this,'custom_woocommerce_auto_complete_order' ));
+        
+        
+        //JD-106.1 //Fix the breadcrumbs
+        #add_filter( 'woocommerce_breadcrumb_defaults', array(&$this,'custom_woocommerce_breadcrumbs' ));
+        
+        
+        //
         // Adding scripts & styles to all pages
         // Examples:
         //        wp_enqueue_script('jquery');
@@ -139,6 +150,26 @@ class Jock_Plugin extends Jock_LifeCycle {
 
     }
     
+    function custom_woocommerce_breadcrumbs()
+    {
+          return array(
+            'delimiter'   => ' | ',
+            'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
+            'wrap_after'  => '</nav>',
+            'before'      => _x( 'Shop', 'breadcrumb', 'woocommerce' ),
+            'after'       => '',
+            'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+        );
+    }
+    
+    function custom_woocommerce_auto_complete_order( $order_id ) { 
+        if ( ! $order_id ) {
+            return;
+        }
+
+        $order = wc_get_order( $order_id );
+        $order->update_status( 'completed' );
+    }
     
     //ACTIONS
     function validate_checkout_field_process() 

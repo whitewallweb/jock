@@ -7,7 +7,6 @@
  * @version     2.3.0
  * @see         woocommerce_breadcrumb()
  */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
