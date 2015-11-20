@@ -421,3 +421,23 @@ class Jock_Plugin extends Jock_LifeCycle {
    }
 
 }
+function check_user ($params, $content = null){
+  //check tha the user is logged in
+  if ( is_user_logged_in() ){
+ 
+    //user is logged in so show the content
+    return $content;
+ 
+  }
+ 
+  else{
+ 
+    //user is not logged in so hide the content
+    return;
+ 
+  }
+ 
+}
+ 
+//add a shortcode which calls the above function
+add_shortcode('loggedin', 'check_user' );

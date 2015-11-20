@@ -550,7 +550,10 @@ textarea.form-control.message {
   height: 22px;
   background: url("../img/link-dots.png") repeat-x center;
 }
-
+.right-side
+{
+    width:100%;
+}
 /* line 449, ../Sass/main.scss */
 .right-side ul {
   margin: 0;
@@ -823,11 +826,11 @@ list-style: none;
 .widget_shopping_cart
 {
     background-color: #fff;
-    margin-left:20px;
+/*    margin-left:20px;*/
     padding:5px;
-    margin-bottom: 10px;
+/*    margin-bottom: 10px;*/
     width: 100%;
-    max-width:291px;
+/*    max-width:291px;*/
 }
 .widget_shopping_cart .buttons
 {
@@ -1121,9 +1124,13 @@ div.tabcontents
 
 #ad img {
     height:auto !important;
-    margin-left:20px;
+    /*margin-left:20px;*/
+    width:100%;
 }
-
+#ad .product_list_widget img
+{
+    width:50px;
+}
 .min-height-210 {
 	min-height: 270px;
 }
