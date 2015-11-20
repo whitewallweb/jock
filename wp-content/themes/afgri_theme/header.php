@@ -35,11 +35,11 @@
 
 <div class="header-bg">
 	<?php if (!is_front_page()) { ?>
-		<img src="<?php echo get_template_directory_uri()?>/img/header_images/headerstrip.jpg" style="width:100%">
+		<img src="<?php echo get_template_directory_uri()?>/img/header_images/headerstrip.jpg" style="width:101%">
 	<?php } ?>
     <div class="container top-container">
 		<?php if (is_front_page()) { ?>
-			<img src="<?php echo get_template_directory_uri()?>/img/header_images/Home-Sliders-2-new.jpg" style="width:100%">
+			<img src="<?php echo get_template_directory_uri()?>/img/header_images/Home-Sliders-2-new.jpg" style="width:101%">
          <?php }?>
     </div>
 
