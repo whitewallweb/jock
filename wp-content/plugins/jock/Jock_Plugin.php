@@ -129,8 +129,7 @@ class Jock_Plugin extends Jock_LifeCycle {
         add_action( 'woocommerce_thankyou', array(&$this,'custom_woocommerce_auto_complete_order' ));
         
         
-        //JD-106.1 //Fix the breadcrumbs
-        #add_filter( 'woocommerce_breadcrumb_defaults', array(&$this,'custom_woocommerce_breadcrumbs' ));
+         add_filter( 'woocommerce_thankyou_order_received_text', array(&$this,'custom_woocommerce_thankyou_order_received_text' ));
         
         
         //
@@ -148,6 +147,11 @@ class Jock_Plugin extends Jock_LifeCycle {
         // Register AJAX hooks
         // http://plugin.michael-simpson.com/?page_id=41
 
+    }
+    
+    function custom_woocommerce_thankyou_order_received_text()
+    {
+        echo "Thank you for your order, you can track your order and download invoices <a href='/my-account'>here</a>";
     }
     
     function custom_woocommerce_breadcrumbs()
@@ -421,23 +425,4 @@ class Jock_Plugin extends Jock_LifeCycle {
    }
 
 }
-function check_user ($params, $content = null){
-  //check tha the user is logged in
-  if ( is_user_logged_in() ){
- 
-    //user is logged in so show the content
-    return $content;
- 
-  }
- 
-  else{
- 
-    //user is not logged in so hide the content
-    return;
- 
-  }
- 
-}
- 
-//add a shortcode which calls the above function
-add_shortcode('loggedin', 'check_user' );
+
