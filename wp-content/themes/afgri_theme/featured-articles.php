@@ -1,6 +1,6 @@
 <div class="container center-content">
     <div class="row">
-        <div class="col-xs-12 col-md-6 col-sm-4">
+        <div class="col-xs-12 col-md-4 col-sm-4">
             <div class="hp-fa">
                 <?php $args = array(
                     'posts_per_page' => 1,
@@ -27,7 +27,7 @@
                 <?php endwhile; ?>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-4 col-md-4">
             <div class="hp-rn">
                 <h3>Recent News</h3>
 
@@ -36,7 +36,7 @@
 
             </div>
         </div>
-        <div class="col-xs-12 col-sm-4 hide-mobile">
+        <div class="col-xs-12 col-sm-4  col-md-4 hide-mobile">
             <div class="hp-ps">
 
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/Adspace - Jock_Promo-Teaser.jpg">
