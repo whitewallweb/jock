@@ -189,7 +189,8 @@ class Jock_Plugin extends Jock_LifeCycle {
         //default values
         
         $_POST['billing_state'] = 'Gauteng';
-        $_POST['billing_city'] = 'Gauteng';
+       
+        $_POST['shipping_state'] = 'Gauteng';
         
     }
     
