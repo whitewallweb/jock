@@ -226,7 +226,7 @@ color: #00355f !important;
 .hpcontent {
   padding: 0 15px;
     min-height: 150px;
-    height:100vh;
+   max-height: 150px;
 }
 
 /* line 150, ../Sass/main.scss */
