@@ -46,13 +46,14 @@ get_header( 'shop' ); ?>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php woocommerce_product_subcategories(); ?>
-				<ul class="shoploop">
+				<div class="shoploop row">
 				<?php while ( have_posts() ) : the_post(); ?>
-
+                                        <div class="col-md-6 col-xs-12">
 					<?php wc_get_template_part( 'content', 'single-product' ); ?>
-
+                                        </div>
+                                            
 				<?php endwhile; // end of the loop. ?>
-				</ul>
+				</div>
 				<div class="clear"></div>
 
 			<?php woocommerce_product_loop_end(); ?>

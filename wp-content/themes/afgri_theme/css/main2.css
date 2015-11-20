@@ -845,9 +845,9 @@ float:left;
 }
 div.product
 {
-   width:49%;
+/*   width:49%;
    float:left;
-   padding:5px;
+   padding:5px;*/
 }
 div.product label
 {
@@ -947,7 +947,7 @@ input.input-text.qty.text {
 }
 
 .summary.entry-summary {
-	min-height: 690px;
+/*	min-height: 690px;*/
 }
 
 .short-description {
