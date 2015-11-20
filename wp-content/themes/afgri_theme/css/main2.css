@@ -454,7 +454,10 @@ textarea.form-control.message {
 .ml, .mr {
   padding: 0;
 }
-
+.wc-proceed-to-checkout
+{
+   margin-bottom: 10px;   
+}
 /* line 359, ../Sass/main.scss */
 .stockist {
   height: 86px;
