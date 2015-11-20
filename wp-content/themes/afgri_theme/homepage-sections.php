@@ -1,7 +1,7 @@
 <div class="container center-content">
     <div class="row">
         <div class="col-xs-12 col-sm-3">
-            <div class="hp-promo">
+            <div class="hp-promo" style="height : 100vh;">
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/home_promotions.jpg">
                 <div class="hpcontent">
                     <h2>Current Promotions</h2>
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-3">
-            <div class="hp-products">
+            <div class="hp-products" style="height : 100vh;">
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/home_products.jpg">
                 <div class="hpcontent">
                     <h2>Our Products</h2>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-3">
-            <div class="hp-petfolio">
+            <div class="hp-petfolio" style="height : 100vh;">
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/home_folio.jpg">
                 <div class="hpcontent">
                     <h2>DogFolio</h2>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-3">
-            <div class="hp-events">
+            <div class="hp-events" style="height : 100vh;">
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/home_events.jpg">
                 <div class="hpcontent">
                     <h2>Upcoming Events</h2>
