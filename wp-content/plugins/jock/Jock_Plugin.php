@@ -151,7 +151,7 @@ class Jock_Plugin extends Jock_LifeCycle {
     
     function custom_woocommerce_thankyou_order_received_text()
     {
-        echo "<h4>Thank you for your order, <a href='/my-account'> Track your orders and download invoices</a><br/></h4>";
+        echo "<h4>Thank you for your order, <a href='/my-account'> Track your orders and download invoices</a></h4><br/><br/>";
     }
     
     function custom_woocommerce_breadcrumbs()
