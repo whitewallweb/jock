@@ -48,7 +48,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</ul>
 
 			<?php endif; ?>
-
 		<?php elseif ( ! WC()->customer->get_shipping_state() || ! WC()->customer->get_shipping_postcode() ) : ?>
 
 			<?php if ( is_cart() && get_option( 'woocommerce_enable_shipping_calc' ) === 'yes' ) : ?>
@@ -58,13 +57,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php elseif ( is_cart() ) : ?>
 
 				<p><?php _e( 'Please continue to the checkout and enter your full address to see if there are any available shipping methods.', 'woocommerce' ); ?></p>
-
 			<?php else : ?>
-
 				<p><?php _e( 'Please fill in your details to see available shipping methods.', 'woocommerce' ); ?></p>
-
 			<?php endif; ?>
-
 		<?php else : ?>
 
 			<?php if ( is_cart() ) : ?>
@@ -82,7 +77,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php endif; ?>
 
 		<?php endif; ?>
-
 		<?php if ( $show_package_details ) : ?>
 			<?php
 				foreach ( $package['contents'] as $item_id => $values ) {
@@ -94,7 +88,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				echo '<p class="woocommerce-shipping-contents"><small>' . __( 'Shipping', 'woocommerce' ) . ': ' . implode( ', ', $product_names ) . '</small></p>';
 			?>
 		<?php endif; ?>
-
 		<?php if ( is_cart() ) : ?>
 			<?php woocommerce_shipping_calculator(); ?>
 		<?php endif; ?>
