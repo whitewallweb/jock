@@ -123,8 +123,8 @@ class Jock_Plugin extends Jock_LifeCycle {
         //JD-95 Custome checkout form
         add_filter('woocommerce_checkout_fields',array(&$this,'custom_checkout_form' ));
         
-        remove_filter( 'the_content', 'wpautop' );
-remove_filter( 'the_excerpt', 'wpautop' );
+        #remove_filter( 'the_content', 'wpautop' );
+        #remove_filter( 'the_excerpt', 'wpautop' );
         
         
         //JD-105 - Order Auto Complete

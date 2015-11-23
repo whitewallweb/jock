@@ -27,7 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php if ( 1 === count( $available_methods ) ) :
 				$method = current( $available_methods );
-
 				echo wp_kses_post( wc_cart_totals_shipping_method_label( $method ) ); ?>
 				<input type="hidden" name="shipping_method[<?php echo $index; ?>]" data-index="<?php echo $index; ?>" id="shipping_method_<?php echo $index; ?>" value="<?php echo esc_attr( $method->id ); ?>" class="shipping_method" />
 
