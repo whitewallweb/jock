@@ -24,13 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?></th>
 	<td>
 		<?php if ( ! empty( $available_methods ) ) : ?>
-
 			<?php if ( 1 === count( $available_methods ) ) :
 				$method = current( $available_methods );
-                        echo "sdfsdf";
 				echo ( wc_cart_totals_shipping_method_label( $method ) ); ?>
 				<input type="hidden" name="shipping_method[<?php echo $index; ?>]" data-index="<?php echo $index; ?>" id="shipping_method_<?php echo $index; ?>" value="<?php echo esc_attr( $method->id ); ?>" class="shipping_method" />
-
 			<?php elseif ( get_option( 'woocommerce_shipping_method_format' ) === 'select' ) : ?>
 
 				<select name="shipping_method[<?php echo $index; ?>]" data-index="<?php echo $index; ?>" id="shipping_method_<?php echo $index; ?>" class="shipping_method">
