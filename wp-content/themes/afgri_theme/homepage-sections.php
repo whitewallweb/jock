@@ -4,10 +4,10 @@
             <div class="hp-promo">
                 <img src="<?php echo get_template_directory_uri() ?>/img/header_images/home_promotions.jpg">
                 <div class="hpcontent">
-                    <h2>Current Promotions</h2>
-                    <p>Watch this space for Great Deals & Promotions</p>
+                    <h2>Shop</h2>
+                    <p>You can purchase Jock Dog Food in our online store. Available in Gauteng only.</p>
                 </div>
-                <a href="<?php echo get_bloginfo('url') ?>/register">Find out more</a>
+                <a href="<?php echo get_bloginfo('url') ?>/shop">Buy Now</a>
             </div>
         </div>
         <div class="col-xs-12 col-sm-3">
