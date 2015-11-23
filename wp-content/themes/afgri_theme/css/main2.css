@@ -467,7 +467,7 @@ textarea.form-control.message {
 /* line 365, ../Sass/main.scss */
 .stockist button {
   margin-top: 25px;
-  margin-left: -20px;
+  margin-right: 20px;
 }
 /* line 369, ../Sass/main.scss */
 .stockist .st-info {
