@@ -468,6 +468,8 @@ textarea.form-control.message {
 .stockist button {
   margin-top: 25px;
   padding-right: 20px;
+  margin-right: 20px;
+  
 }
 /* line 369, ../Sass/main.scss */
 .stockist .st-info {
