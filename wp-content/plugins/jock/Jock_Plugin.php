@@ -128,10 +128,12 @@ class Jock_Plugin extends Jock_LifeCycle {
         
         
         //JD-105 - Order Auto Complete
-        add_action( 'woocommerce_thankyou', array(&$this,'custom_woocommerce_auto_complete_order' ));
+        add_action( 'woocommerce_payment_complete', array(&$this,'custom_woocommerce_auto_complete_order' ));
         
         
-         add_filter( 'woocommerce_thankyou_order_received_text', array(&$this,'custom_woocommerce_thankyou_order_received_text' ));
+        add_filter( 'woocommerce_thankyou_order_received_text', array(&$this,'custom_woocommerce_thankyou_order_received_text' ));
+        
+        add_filter( 'woocommerce_add_to_cart_redirect', array(&$this,'add_to_cart_redirect_fix' ));
         
         
         //
@@ -149,6 +151,11 @@ class Jock_Plugin extends Jock_LifeCycle {
         // Register AJAX hooks
         // http://plugin.michael-simpson.com/?page_id=41
 
+    }
+    
+    function add_to_cart_redirect_fix($url)
+    {
+        return "/shop";
     }
     
     function custom_woocommerce_thankyou_order_received_text()
