@@ -136,6 +136,10 @@ class Jock_Plugin extends Jock_LifeCycle {
         add_filter( 'woocommerce_add_to_cart_redirect', array(&$this,'add_to_cart_redirect_fix' ));
         
         
+        add_action( 'wp_enqueue_scripts', array(&$this,'add_scripts' ));
+        
+        //add_action( 'wp_ajax_nopriv_suburbs', 'my_search' );
+        
         //
         // Adding scripts & styles to all pages
         // Examples:
@@ -226,31 +230,54 @@ class Jock_Plugin extends Jock_LifeCycle {
         //exit();
         //var_dump($codes);
         //echo ("<script>\\var postal_codes =  ".json_encode($codes,true).";</script>");
+       foreach(array('billing','shipping') as $section)
+          { 
+                echo "<script>$('#{$section}_location_search').autocomplete({
+                            source:'".plugins_url( '/ajax/suburbs.php',__FILE__)."',
+                            select: function( event, ui ) {
+                                //
+                                jQuery('#{$section}_postcode').val(ui.item.data.code);
+                                jQuery('#{$section}_city').val(ui.item.data.city);
+                                jQuery('#{$section}_suburb').val(ui.item.data.suburb);
+                                //
+                             }    
+                      });</script>";
         
-        echo "<script>$('#billing_city').change(function(){
-                jQuery('#billing_postcode option').remove();
-                //fetch province suburbs
-                jQuery.getJSON('".plugins_url( '/ajax/suburbs.php?group=' , __FILE__ )."'+this.value, function(postal_codes) {
-                    jQuery.each(postal_codes['suburbs'], function(key,suburb) 
-                    {
-                        jQuery('#billing_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
-                    }); });
-                });</script>";
-         
- echo "<script>$('#shipping_city').change(function(){
-                jQuery('#shipping_postcode option').remove();
-                //fetch province suburbs
-                jQuery.getJSON('".plugins_url( '/ajax/suburbs.php?group=' , __FILE__ )."'+this.value, function(postal_codes) {
-                    jQuery.each(postal_codes['suburbs'], function(key,suburb) 
-                    {
-                        jQuery('#shipping_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
-                    }); });
-                });</script>";
-         
-         echo "<style>#ship-to-different-address .checkbox{padding:0;margin:0;display:inline;}#customer_details .col-1,#customer_details .col-2{width:100%;}  #customer_details  div{display:block;float:none;}</style>";
-         echo "<script>$('#billing_city').change();</script>";
-         echo "<script>$('#shipping_city').change();</script>";
+          }
+//        echo "<script>$('#billing_city').change(function(){
+//                jQuery('#billing_postcode option').remove();
+//                //fetch province suburbs
+//                jQuery.getJSON('".plugins_url( '/ajax/suburbs.php?group=' , __FILE__ )."'+this.value, function(postal_codes) {
+//                    jQuery.each(postal_codes['suburbs'], function(key,suburb) 
+//                    {
+//                        jQuery('#billing_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
+//                    }); });
+//                });</script>";
+//         
+// echo "<script>$('#shipping_city').change(function(){
+//                jQuery('#shipping_postcode option').remove();
+//                //fetch province suburbs
+//                jQuery.getJSON('".plugins_url( '/ajax/suburbs.php?group=' , __FILE__ )."'+this.value, function(postal_codes) {
+//                    jQuery.each(postal_codes['suburbs'], function(key,suburb) 
+//                    {
+//                        jQuery('#shipping_postcode').append(jQuery('<option></option>').val(suburb.code).html(suburb.name+' ('+suburb.code+')'));
+//                    }); });
+//                });</script>";
+//         
+//         echo "<style>#ship-to-different-address .checkbox{padding:0;margin:0;display:inline;}#customer_details .col-1,#customer_details .col-2{width:100%;}  #customer_details  div{display:block;float:none;}</style>";
+//         echo "<script>$('#billing_city').change();</script>";
+//         echo "<script>$('#shipping_city').change();</script>";
     }
+    
+    function add_scripts() {
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'jquery-ui-autocomplete' );
+	wp_register_style( 'jquery-ui-styles','http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' );
+	wp_enqueue_style( 'jquery-ui-styles' );
+	wp_register_script( 'my-autocomplete', get_template_directory_uri() . '/js/my-autocomplete.js', array( 'jquery', 'jquery-ui-autocomplete' ), '1.0', false );
+	wp_localize_script( 'my-autocomplete', 'MyAutocomplete', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
+	wp_enqueue_script( 'my-autocomplete' );
+}
     
     function csv_to_array($filename='', $delimiter=',')
 {
@@ -384,21 +411,31 @@ class Jock_Plugin extends Jock_LifeCycle {
 
           foreach(array('billing','shipping') as $section)
           {
+              
+               $fields[$section][$section.'_location_search'] = array(
+                   
+                   'type'=>'text',
+                   'label'=>'Suburb Search (Gauteng Only)',
+               );
+              
               $fields[$section][$section.'_postcode'] = array(
-                'type'=>'select',
+                'type'=>'text',
                 'label'=>'Suburb (Postal Code)',
                 'required'=>1,
-                'options'=>array('0'=>'Please select a city...'),
+                'custom_attributes'=>array('readonly' => true),
+                //'options'=>array('0'=>'Please select a city...'),
                 'class'=>array('form-row-wide'));
             
              $fields[$section][$section.'_city'] = array(
-                'type'=>'select',
+                'type'=>'text',
                 'label'=>'City (Gauteng Only)',
+                'custom_attributes'=>array('readonly' => true),
                 'required'=>1,
-                'options'=>$cities,
+                //'options'=>$cities,
                 'class'=>array('form-row-wide'));
              
               $fields[$section] = array_merge(array_flip(array(
+                    $section.'_location_search',
                     $section.'_country',
                     $section.'_state',
                     $section.'_city',

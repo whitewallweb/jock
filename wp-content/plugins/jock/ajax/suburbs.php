@@ -22,12 +22,19 @@ function csv_to_array($filename='', $delimiter=',')
 }
 $suburb_file = dirname(__FILE__).'/../languages/postal_codes/GP_codes.csv';
 $postal_codes = csv_to_array($suburb_file,';');
-$city_options = array();
+$options = array();
 foreach($postal_codes as $row)
 {
-
-    $city_options[str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))))]['name'] = str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))));
-    $city_options[str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))))]['suburbs'][] = array('name'=> str_replace("'"," ",ucwords(strtolower(trim($row['Location Code Name'])))),'code'=>$row['Post Code']);
+    //build an index
+    $city_name =  str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))));
+    $suburb_name = str_replace("'"," ",ucwords(strtolower(trim($row['Location Code Name']))));
+    $postal_code = $row['Post Code'];
+    
+    $options[$city_name." - ".$suburb_name." (".$postal_code.")"] = array('city'=>$city_name,'suburb'=>$suburb_name,'code'=>$postal_code);
+//    $options[]
+//    
+//    $city_options[str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))))]['name'] = str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))));
+//    $city_options[str_replace("'"," ",ucwords(strtolower(trim($row['Group Name']))))]['suburbs'][] = array('name'=> str_replace("'"," ",ucwords(strtolower(trim($row['Location Code Name'])))),'code'=>$row['Post Code']);
     // exit(var_dump($city_options));
 //                 if(strstr(strtolower($row['group']), 'pretoria') || strstr(strtolower($row['group']), '(gp)')|| strstr(strtolower($row['group']), 'gauteng')|| strstr(strtolower($row['suburb']), 'gauteng'))
 //                 {
@@ -42,4 +49,18 @@ foreach($postal_codes as $row)
 //                     continue;
 //                }
 }
-echo json_encode($city_options[$_GET['group']]);
+
+
+$results = array();
+foreach($options as $index => $value)
+{
+    if(strstr(strtolower($index),strtolower($_GET['term'])))
+    {
+        $results[] = array('label'=>$index,'data'=>$value);
+    }
+}
+
+echo json_encode($results);
+// we must now search for a term
+
+//echo json_encode($city_options[$_GET['group']]);
