@@ -413,7 +413,7 @@ class Jock_Plugin extends Jock_LifeCycle {
           {
               
                $fields[$section][$section.'_location_search'] = array(
-                   
+                   'placeholder'=>'Search your address here',
                    'type'=>'text',
                    'label'=>'Suburb Search (Gauteng Only)',
                );
@@ -422,6 +422,7 @@ class Jock_Plugin extends Jock_LifeCycle {
                 'type'=>'text',
                 'label'=>'Suburb (Postal Code)',
                 'required'=>1,
+                
                 'custom_attributes'=>array('readonly' => true),
                 //'options'=>array('0'=>'Please select a city...'),
                 'class'=>array('form-row-wide'));
@@ -435,8 +436,9 @@ class Jock_Plugin extends Jock_LifeCycle {
                 'class'=>array('form-row-wide'));
              
               $fields[$section] = array_merge(array_flip(array(
-                    $section.'_location_search',
+                   
                     $section.'_country',
+                    $section.'_location_search',
                     $section.'_state',
                     $section.'_city',
                     //$section.'_suburb',    
