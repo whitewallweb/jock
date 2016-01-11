@@ -20,7 +20,7 @@
 </table>
 
 <h1 class="document-type-label">
-<?php if( $wpo_wcpdf->get_header_logo_id() ) echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'Invoice', 'wpo_wcpdf' ) ); ?>
+<?php if( $wpo_wcpdf->get_header_logo_id() ) echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'TAX Invoice', 'wpo_wcpdf' ) ); ?>
 </h1>
 
 <?php do_action( 'wpo_wcpdf_after_document_label', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
@@ -122,7 +122,7 @@
 						<?php foreach( $wpo_wcpdf->get_woocommerce_totals() as $key => $total ) : ?>
 						<tr class="<?php echo $key; ?>">
 							<td class="no-borders"></td>
-							<th class="description"><?php echo $total['label']; ?></th>
+							<th class="description"><?php echo $total['label']; ?> (incl  14% TAX)</th>
 							<td class="price"><span class="totals-price"><?php echo $total['value']; ?></span></td>
 						</tr>
 						<?php endforeach; ?>
