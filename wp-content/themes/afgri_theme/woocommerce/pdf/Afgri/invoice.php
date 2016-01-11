@@ -122,7 +122,7 @@
 						<?php foreach( $wpo_wcpdf->get_woocommerce_totals() as $key => $total ) : ?>
 						<tr class="<?php echo $key; ?>">
 							<td class="no-borders"></td>
-							<th class="description"><?php echo $total['label']; ?> (incl  14% TAX)</th>
+							<th class="description"><?php echo $total['label']; ?> <?php echo $total['value']=="Total"?"(incl  14% TAX)":"" ?></th>
 							<td class="price"><span class="totals-price"><?php echo $total['value']; ?></span></td>
 						</tr>
 						<?php endforeach; ?>
