@@ -7,7 +7,7 @@
 		if( $wpo_wcpdf->get_header_logo_id() ) {
 			$wpo_wcpdf->header_logo();
 		} else {
-			echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'Invoice', 'wpo_wcpdf' ) );
+			echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'Order Confirmation', 'wpo_wcpdf' ) );
 		}
 		?>
 		</td>
@@ -20,7 +20,7 @@
 </table>
 
 <h1 class="document-type-label">
-<?php if( $wpo_wcpdf->get_header_logo_id() ) echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'TAX Invoice', 'wpo_wcpdf' ) ); ?>
+<?php if( $wpo_wcpdf->get_header_logo_id() ) echo apply_filters( 'wpo_wcpdf_invoice_title', __( 'Order Confirmation', 'wpo_wcpdf' ) ); ?>
 </h1>
 
 <?php do_action( 'wpo_wcpdf_after_document_label', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
@@ -48,13 +48,13 @@
 				<?php do_action( 'wpo_wcpdf_before_order_data', $wpo_wcpdf->export->template_type, $wpo_wcpdf->export->order ); ?>
 				<?php if ( isset($wpo_wcpdf->settings->template_settings['display_number']) && $wpo_wcpdf->settings->template_settings['display_number'] == 'invoice_number') { ?>
 				<tr class="invoice-number">
-					<th><?php _e( 'Invoice Number:', 'wpo_wcpdf' ); ?></th>
+					<th><?php _e( 'Order Confirmation Number:', 'wpo_wcpdf' ); ?></th>
 					<td><?php $wpo_wcpdf->invoice_number(); ?></td>
 				</tr>
 				<?php } ?>
 				<?php if ( isset($wpo_wcpdf->settings->template_settings['display_date']) && $wpo_wcpdf->settings->template_settings['display_date'] == 'invoice_date') { ?>
 				<tr class="invoice-date">
-					<th><?php _e( 'Invoice Date:', 'wpo_wcpdf' ); ?></th>
+					<th><?php _e( 'Order Date:', 'wpo_wcpdf' ); ?></th>
 					<td><?php $wpo_wcpdf->invoice_date(); ?></td>
 				</tr>
 				<?php } ?>
